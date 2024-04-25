@@ -43,7 +43,7 @@ const Home = ({ orders }) => {
 
   return (
     <div className="container mx-auto text-slate-800">
-      <h1 className="text-3xl font-bold mb-4 text-red-800">Orders</h1>
+      <h1 className="text-3xl font-bold mb-4 text-red-800">RPL Order Fixes</h1>
       <div className="mb-4">
         <input
           type="text"
