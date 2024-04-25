@@ -29,8 +29,8 @@ const Home = ({ orders }) => {
   
 
   return (
-    <div className="container mx-auto">
-      <h1 className="text-3xl font-bold mb-4">Orders</h1>
+    <div className="container mx-auto text-slate-800">
+      <h1 className="text-3xl font-bold mb-4 text-red-800">Orders</h1>
       <div className="mb-4">
         <input
           type="text"
@@ -40,10 +40,10 @@ const Home = ({ orders }) => {
           className="border border-gray-400 px-4 py-2 mb-2"
         />
       </div>
-      <div className="overflow-x-hidden">
+      <div className="overflow-x-hidden bg-slate-800">
         <div className="w-full">
-          <table className="w-full table-fixed border border-gray-400">
-            <thead className="bg-gray-200">
+          <table className="w-full table-fixed border bg-slate-800 border-gray-400">
+            <thead className="bg-gray-200 bg-slate-800">
               <tr>
                 <th className="border border-gray-400 px-4 py-2">User ID</th>
                 <th className="border border-gray-400 px-4 py-2">Circumstance</th>
@@ -56,7 +56,7 @@ const Home = ({ orders }) => {
                 <th className="border border-gray-400 px-4 py-2">Preprint Adjustment</th>
               </tr>
             </thead>
-            <tbody className="bg-white">
+            <tbody className="bg-slate-800 text-red-500 font-bold">
               {filteredOrders && filteredOrders.map(order => (
                 <tr key={order._id} className="border border-gray-400">
                   <td className="border border-gray-400 px-4 py-2">{order.userId}</td>
