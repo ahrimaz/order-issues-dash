@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { MongoClient } from 'mongodb';
-import { parse } from 'json2csv'
+import { parse } from 'json2csv';
 const dbUri = process.env.DB_URI;
 
 const Home = ({ orders }) => {
@@ -12,31 +12,6 @@ const Home = ({ orders }) => {
     setSearchQuery(query);
     filterOrders(query);
   };
-
-  const handleExportToCSV = () => {
-    const fieldsToInclude = ['orderNumber', 'studio', 'circumstance', 'itemsQtyItemSurface', 'dpNumber', 'preprintAdjustment', 'dp2Adjustment', 'retouchAdjustment' ];
-  
-    const filteredData = filteredOrders.map(order => {
-      const filteredOrder = {};
-      fieldsToInclude.forEach(field => {
-        filteredOrder[field] = order[field];
-      });
-      return filteredOrder;
-    });
-  
-    const csvData = parse(filteredData);
-  
-    const blob = new Blob([csvData], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'orders.csv';
-    document.body.appendChild(a);
-    a.click();
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(a);
-  };
-  
 
   const filterOrders = (query) => {
     const filtered = orders.filter(order =>
@@ -52,7 +27,19 @@ const Home = ({ orders }) => {
     );
     setFilteredOrders(filtered);
   };
-  
+
+  const handleExportToCSV = () => {
+    const csvData = parse(filteredOrders); 
+    const blob = new Blob([csvData], { type: 'text/csv' }); 
+    const url = window.URL.createObjectURL(blob); 
+    const a = document.createElement('a'); 
+    a.href = url;
+    a.download = 'orders.csv'; 
+    document.body.appendChild(a); 
+    a.click(); 
+    window.URL.revokeObjectURL(url); 
+    document.body.removeChild(a); 
+  };
 
   return (
     <div className="container mx-auto text-slate-800">
@@ -65,6 +52,11 @@ const Home = ({ orders }) => {
           onChange={handleSearchInputChange}
           className="border border-gray-400 px-4 py-2 mb-2"
         />
+      </div>
+      <div className="mb-4">
+        <button onClick={handleExportToCSV} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
+          Export to CSV
+        </button>
       </div>
       <div className="overflow-x-hidden bg-slate-800">
         <div className="w-full">
@@ -98,9 +90,6 @@ const Home = ({ orders }) => {
               ))}
             </tbody>
           </table>
-          <button onClick={handleExportToCSV} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-            Export to CSV
-          </button>
         </div>
       </div>
     </div>
