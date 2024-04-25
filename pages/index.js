@@ -29,16 +29,27 @@ const Home = ({ orders }) => {
   };
 
   const handleExportToCSV = () => {
-    const csvData = parse(filteredOrders); 
-    const blob = new Blob([csvData], { type: 'text/csv' }); 
-    const url = window.URL.createObjectURL(blob); 
-    const a = document.createElement('a'); 
+    const fieldsToInclude = ['orderNumber', 'studio', 'circumstance', 'dpNumber', 'itemsQtyItemSurface', 'retouchAdjustment', 'dp2Adjustment', 'preprintAdjustment,'];
+  
+    const filteredData = filteredOrders.map(order => {
+      const filteredOrder = {};
+      fieldsToInclude.forEach(field => {
+        filteredOrder[field] = order[field];
+      });
+      return filteredOrder;
+    });
+  
+    const csvData = parse(filteredData);
+  
+    const blob = new Blob([csvData], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
     a.href = url;
-    a.download = 'orders.csv'; 
-    document.body.appendChild(a); 
-    a.click(); 
-    window.URL.revokeObjectURL(url); 
-    document.body.removeChild(a); 
+    a.download = 'orders.csv';
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
   };
 
   return (
