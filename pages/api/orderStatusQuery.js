@@ -1,7 +1,3 @@
-// pages/api/orderStatus.js
-
-import axios from 'axios';
-
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
@@ -12,22 +8,27 @@ export default async function handler(req, res) {
   const authHeader = `Basic ${Buffer.from('DI:RPLAPI').toString('base64')}`;
 
   try {
-    const response = await axios.post(
-      'https://dmz.richmondprolab.net/OrderAPI',
-      {
-        account,
-        orderID,
-        format,
-        type,
+    const formData = new URLSearchParams();
+    formData.append('account', account);
+    formData.append('orderID', orderID);
+    formData.append('format', format);
+    formData.append('type', type);
+
+    const response = await fetch('https://dmz.richmondprolab.net/OrderAPI', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: authHeader,
       },
-      {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          Authorization: authHeader,
-        },
-      }
-    );
-    res.status(200).json(response.data);
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch order status');
+    }
+
+    const data = await response.json();
+    res.status(200).json(data);
   } catch (err) {
     res.status(500).json({ error: 'Failed to fetch order status. Please try again later.' });
   }
