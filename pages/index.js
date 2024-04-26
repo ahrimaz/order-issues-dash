@@ -5,9 +5,16 @@ const dbUri = process.env.DB_URI;
 
 const OrderCard = ({ order }) => {
   const [showDetails, setShowDetails] = useState(false);
+  const [image, setImage] = useState(null);
 
   const toggleDetails = () => {
     setShowDetails(!showDetails);
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setImage(file);
+
   };
 
   return (
@@ -27,6 +34,8 @@ const OrderCard = ({ order }) => {
           <div>Retouch Adjustment: {order.retouchAdjustment}</div>
           <div>DP2 Adjustment: {order.dp2Adjustment}</div>
           <div>Preprint Adjustment: {order.preprintAdjustment}</div>
+          <input type="file" onChange={handleImageChange} />
+          {image && <img src={URL.createObjectURL(image)} alt="Uploaded" className="mt-4" />}
         </div>
       )}
     </div>
