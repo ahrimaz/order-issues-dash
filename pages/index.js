@@ -29,18 +29,7 @@ const Home = ({ orders }) => {
   };
 
   const handleExportToCSV = () => {
-    const fieldsToInclude = ['orderNumber', 'studio', 'circumstance', 'dpNumber', 'itemsQtyItemSurface', 'retouchAdjustment', 'dp2Adjustment', 'preprintAdjustment,'];
-  
-    const filteredData = filteredOrders.map(order => {
-      const filteredOrder = {};
-      fieldsToInclude.forEach(field => {
-        filteredOrder[field] = order[field];
-      });
-      return filteredOrder;
-    });
-  
-    const csvData = parse(filteredData);
-  
+    const csvData = parse(filteredOrders);
     const blob = new Blob([csvData], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -53,55 +42,54 @@ const Home = ({ orders }) => {
   };
 
   return (
-    <div className="container mx-auto text-slate-800">
-      <h1 className="text-3xl font-bold mb-4 text-red-800">RPL Order Fixes</h1>
+    <div className="container mx-auto text-gray-800">
+      <h1 className="text-3xl font-bold mb-6 text-blue-700">Orders</h1>
       <div className="mb-4">
         <input
           type="text"
           placeholder="Search..."
           value={searchQuery}
           onChange={handleSearchInputChange}
-          className="border border-gray-400 px-4 py-2 mb-2"
+          className="border border-gray-400 px-4 py-2 mb-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-      </div>
-      <div className="mb-4">
-        <button onClick={handleExportToCSV} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4">
+        <button
+          onClick={handleExportToCSV}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
           Export to CSV
         </button>
       </div>
-      <div className="overflow-x-hidden bg-slate-800">
-        <div className="w-full">
-          <table className="w-full table-fixed border bg-slate-800 border-gray-400">
-            <thead className="bg-slate-800">
-              <tr>
-                <th className="border border-gray-400 px-4 py-2">User ID</th>
-                <th className="border border-gray-400 px-4 py-2">Circumstance</th>
-                <th className="border border-gray-400 px-4 py-2">Studio</th>
-                <th className="border border-gray-400 px-4 py-2">Order Number</th>
-                <th className="border border-gray-400 px-4 py-2">DP Numbers</th>
-                <th className="border border-gray-400 px-4 py-2">Items, Quantity, Surface</th>
-                <th className="border border-gray-400 px-4 py-2">Retouch Adjustment</th>
-                <th className="border border-gray-400 px-4 py-2">DP2 Adjustment</th>
-                <th className="border border-gray-400 px-4 py-2">Preprint Adjustment</th>
+      <div className="overflow-x-auto">
+        <table className="w-full table-fixed border-collapse border border-gray-300">
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="border border-gray-300 px-4 py-2">User ID</th>
+              <th className="border border-gray-300 px-4 py-2">Circumstance</th>
+              <th className="border border-gray-300 px-4 py-2">Studio</th>
+              <th className="border border-gray-300 px-4 py-2">Order Number</th>
+              <th className="border border-gray-300 px-4 py-2">DP Numbers</th>
+              <th className="border border-gray-300 px-4 py-2">Items, Quantity, Surface</th>
+              <th className="border border-gray-300 px-4 py-2">Retouch Adjustment</th>
+              <th className="border border-gray-300 px-4 py-2">DP2 Adjustment</th>
+              <th className="border border-gray-300 px-4 py-2">Preprint Adjustment</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredOrders.map(order => (
+              <tr key={order._id} className="border border-gray-300">
+                <td className="border border-gray-300 px-4 py-2">{order.userId}</td>
+                <td className="border border-gray-300 px-4 py-2">{order.circumstance}</td>
+                <td className="border border-gray-300 px-4 py-2">{order.studio}</td>
+                <td className="border border-gray-300 px-4 py-2">{order.orderNumber}</td>
+                <td className="border border-gray-300 px-4 py-2">{order.dpNumber}</td>
+                <td className="border border-gray-300 px-4 py-2">{order.itemsQtyItemSurface}</td>
+                <td className="border border-gray-300 px-4 py-2">{order.retouchAdjustment}</td>
+                <td className="border border-gray-300 px-4 py-2">{order.dp2Adjustment}</td>
+                <td className="border border-gray-300 px-4 py-2">{order.preprintAdjustment}</td>
               </tr>
-            </thead>
-            <tbody className="bg-slate-800 text-red-500 font-bold">
-              {filteredOrders && filteredOrders.map(order => (
-                <tr key={order._id} className="border border-gray-400">
-                  <td className="border border-gray-400 px-4 py-2">{order.userId}</td>
-                  <td className="border border-gray-400 px-4 py-2">{order.circumstance}</td>
-                  <td className="border border-gray-400 px-4 py-2">{order.studio}</td>
-                  <td className="border border-gray-400 px-4 py-2">{order.orderNumber}</td>
-                  <td className="border border-gray-400 px-4 py-2">{order.dpNumber}</td>
-                  <td className="border border-gray-400 px-4 py-2">{order.itemsQtyItemSurface}</td>
-                  <td className="border border-gray-400 px-4 py-2">{order.retouchAdjustment}</td>
-                  <td className="border border-gray-400 px-4 py-2">{order.dp2Adjustment}</td>
-                  <td className="border border-gray-400 px-4 py-2">{order.preprintAdjustment}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
