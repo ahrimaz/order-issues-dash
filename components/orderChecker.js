@@ -6,18 +6,25 @@ const OrderCheck = () => {
   const [orderStatus, setOrderStatus] = useState(null);
   const [account, setAccount] = useState('');
   const [orderID, setOrderID] = useState('');
-
+  
   const handleCheckOrderStatus = async () => {
     setLoading(true);
     setError(null);
   
     try {
+      const formData = new URLSearchParams();
+      formData.append('account', account);
+      formData.append('orderID', orderID);
+      formData.append('format', 'json');
+      formData.append('type', 'standard');
+  
       const response = await fetch('/api/orderStatus', {
         method: 'POST',
+        body: formData.toString(), // Convert FormData to string
         headers: {
-          'Content-Type': 'application/json',
+          // Set the correct content type
+          'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: JSON.stringify({ account, orderID, format: 'json', type: 'standard' }),
       });
   
       if (!response.ok) {
@@ -32,6 +39,9 @@ const OrderCheck = () => {
       setLoading(false);
     }
   };
+  
+  
+
 
   return (
     <div>
