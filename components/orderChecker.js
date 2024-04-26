@@ -4,7 +4,7 @@ import OrderStatusCard from './orderStatusCard';
 const OrderCheck = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [orderStatus, setOrderStatus] = useState([]); // Initialize as empty array
+  const [orderStatus, setOrderStatus] = useState([]);
   const [account, setAccount] = useState('');
   const [orderID, setOrderID] = useState('');
 
@@ -32,7 +32,7 @@ const OrderCheck = () => {
       }
 
       const data = await response.json();
-      setOrderStatus(data.Response); // Assuming the array of order status is inside the 'Response' property
+      setOrderStatus(data.Response);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -55,9 +55,8 @@ const OrderCheck = () => {
         {loading ? 'Checking...' : 'Check Order Status'}
       </button>
       {error && <div>Error: {error}</div>}
-      {orderStatus.length > 0 && ( // Check if orderStatus is an array and has elements before rendering
+      {orderStatus.length > 0 && (
         <div>
-          {/* Render each order status as a card */}
           {orderStatus.map(order => (
             <OrderStatusCard key={order.LabOrderID} order={order} />
           ))}
