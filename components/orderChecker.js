@@ -20,9 +20,8 @@ const OrderCheck = () => {
   
       const response = await fetch('/api/orderStatus', {
         method: 'POST',
-        body: formData.toString(), // Convert FormData to string
+        body: formData.toString(),
         headers: {
-          // Set the correct content type
           'Content-Type': 'application/x-www-form-urlencoded',
         },
       });

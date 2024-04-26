@@ -1,9 +1,13 @@
+// pages/api/orderStatus.js
+
 import axios from 'axios';
 
 export default async function handler(req, res) {
-  const { account, orderID } = req.body;
-  const format = 'json';
-  const type = 'standard';
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method Not Allowed' });
+  }
+
+  const { account, orderID, format, type } = req.body;
 
   const authHeader = `Basic ${Buffer.from('DI:RPLAPI').toString('base64')}`;
 
