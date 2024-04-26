@@ -3,6 +3,36 @@ import { MongoClient } from 'mongodb';
 import { parse } from 'json2csv';
 const dbUri = process.env.DB_URI;
 
+const OrderCard = ({ order }) => {
+  const [showDetails, setShowDetails] = useState(false);
+
+  const toggleDetails = () => {
+    setShowDetails(!showDetails);
+  };
+
+  return (
+    <div className="border border-gray-300 rounded-lg mb-4 overflow-hidden">
+      <div className="p-4 cursor-pointer" onClick={toggleDetails}>
+        <div className="flex justify-between">
+          <div className="font-bold text-lg">{order.orderNumber}</div>
+          <div className="text-gray-600">{order.userId}</div>
+        </div>
+        <div className="text-gray-700">{order.circumstance}</div>
+      </div>
+      {showDetails && (
+        <div className="p-4 bg-gray-100">
+          <div>Studio: {order.studio}</div>
+          <div>DP Numbers: {order.dpNumber}</div>
+          <div>Items, Quantity, Surface: {order.itemsQtyItemSurface}</div>
+          <div>Retouch Adjustment: {order.retouchAdjustment}</div>
+          <div>DP2 Adjustment: {order.dp2Adjustment}</div>
+          <div>Preprint Adjustment: {order.preprintAdjustment}</div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const Home = ({ orders }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredOrders, setFilteredOrders] = useState(orders);
@@ -44,13 +74,13 @@ const Home = ({ orders }) => {
   return (
     <div className="container mx-auto text-gray-800">
       <h1 className="text-3xl font-bold mb-6 text-blue-700">Orders</h1>
-      <div className="mb-4">
+      <div className="mb-4 flex justify-between items-center">
         <input
           type="text"
           placeholder="Search..."
           value={searchQuery}
           onChange={handleSearchInputChange}
-          className="border border-gray-400 px-4 py-2 mb-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="border border-gray-400 px-4 py-2 mb-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 flex-grow mr-4"
         />
         <button
           onClick={handleExportToCSV}
@@ -60,36 +90,9 @@ const Home = ({ orders }) => {
         </button>
       </div>
       <div className="overflow-x-auto">
-        <table className="w-full table-fixed border-collapse border border-gray-300">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="border border-gray-300 px-4 py-2">User ID</th>
-              <th className="border border-gray-300 px-4 py-2">Circumstance</th>
-              <th className="border border-gray-300 px-4 py-2">Studio</th>
-              <th className="border border-gray-300 px-4 py-2">Order Number</th>
-              <th className="border border-gray-300 px-4 py-2">DP Numbers</th>
-              <th className="border border-gray-300 px-4 py-2">Items, Quantity, Surface</th>
-              <th className="border border-gray-300 px-4 py-2">Retouch Adjustment</th>
-              <th className="border border-gray-300 px-4 py-2">DP2 Adjustment</th>
-              <th className="border border-gray-300 px-4 py-2">Preprint Adjustment</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredOrders.map(order => (
-              <tr key={order._id} className="border border-gray-300">
-                <td className="border border-gray-300 px-4 py-2">{order.userId}</td>
-                <td className="border border-gray-300 px-4 py-2">{order.circumstance}</td>
-                <td className="border border-gray-300 px-4 py-2">{order.studio}</td>
-                <td className="border border-gray-300 px-4 py-2">{order.orderNumber}</td>
-                <td className="border border-gray-300 px-4 py-2">{order.dpNumber}</td>
-                <td className="border border-gray-300 px-4 py-2">{order.itemsQtyItemSurface}</td>
-                <td className="border border-gray-300 px-4 py-2">{order.retouchAdjustment}</td>
-                <td className="border border-gray-300 px-4 py-2">{order.dp2Adjustment}</td>
-                <td className="border border-gray-300 px-4 py-2">{order.preprintAdjustment}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        {filteredOrders.map(order => (
+          <OrderCard key={order._id} order={order} />
+        ))}
       </div>
     </div>
   );
