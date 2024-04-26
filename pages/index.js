@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { MongoClient } from 'mongodb';
 import { parse } from 'json2csv';
+
 const dbUri = process.env.DB_URI;
 
 const OrderCard = ({ order }) => {
@@ -15,6 +16,12 @@ const OrderCard = ({ order }) => {
     const file = event.target.files[0];
     setImage(file);
 
+  };
+
+  const formatTimestamp = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleString(); // Use toLocaleString to format the date and time
+    // You can adjust the formatting based on your requirements
   };
 
   return (
@@ -34,6 +41,7 @@ const OrderCard = ({ order }) => {
           <div>Retouch Adjustment: {order.retouchAdjustment}</div>
           <div>DP2 Adjustment: {order.dp2Adjustment}</div>
           <div>Preprint Adjustment: {order.preprintAdjustment}</div>
+          <div>Date: {formatTimestamp(order.timeStamp)}</div>
           <input type="file" onChange={handleImageChange} />
           {image && <img src={URL.createObjectURL(image)} alt="Uploaded" className="mt-4" />}
         </div>
@@ -41,6 +49,7 @@ const OrderCard = ({ order }) => {
     </div>
   );
 };
+
 
 const Home = ({ orders }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -82,7 +91,7 @@ const Home = ({ orders }) => {
 
   return (
     <div className="container mx-auto text-gray-800">
-      <h1 className="text-3xl font-bold mb-6 text-blue-700">Orders</h1>
+      <h1 className="text-3xl font-bold mb-6 text-blue-700">Order Fixes</h1>
       <div className="mb-4 flex justify-between items-center">
         <input
           type="text"
