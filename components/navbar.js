@@ -5,12 +5,20 @@ const Navbar = () => {
     <nav className="bg-gradient-to-b from-slate-800 to-slate-700 text-white p-2 fixed top-0 left-0 w-full shadow-lg z-10">
       <div className="container mx-auto flex justify-between items-center">
         <div>
-          <Link href="/" className="text-xl font-bold">Home</Link>
+          <Link href="/">
+            <span className="text-xl font-bold cursor-pointer">Home</span>
+          </Link>
         </div>
-        <div>
-          <Link href="/orderStatus" classname="ml-4">Order Status Check</Link>
-          <Link href="/about" className="ml-4">About</Link>
-          <Link href="/contact" className="ml-4">Contact</Link>
+        <div className="flex">
+          <Link href="/orderStatus">
+            <span className="ml-4 cursor-pointer">Order Status Check</span>
+          </Link>
+          <Link href="/about">
+            <span className="ml-4 cursor-pointer">About</span>
+          </Link>
+          <Link href="/contact">
+            <span className="ml-4 cursor-pointer">Contact</span>
+          </Link>
         </div>
       </div>
     </nav>
