@@ -1,13 +1,14 @@
 import "@/styles/globals.css";
 import Nav from "@/components/navbar";
-
-export default function App({ Component, pageProps }) {
+import { SessionProvider } from "next-auth/react"
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   return (
-    <>
+    <SessionProvider session={session}>
       <Nav />
-      <div className="pt-16">
-        <Component {...pageProps} />
-      </div>
-    </>
-  );
+      <Component {...pageProps} />
+    </SessionProvider>
+  )
 }

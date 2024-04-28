@@ -20,8 +20,7 @@ const OrderCard = ({ order }) => {
 
   const formatTimestamp = (timestamp) => {
     const date = new Date(timestamp);
-    return date.toLocaleString(); // Use toLocaleString to format the date and time
-    // You can adjust the formatting based on your requirements
+    return date.toLocaleString(); // use toLocaleString to format the date and time - no need for a utility
   };
 
   return (

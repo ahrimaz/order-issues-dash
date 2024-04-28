@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Login from './login';
 
 const Navbar = () => {
   return (
@@ -9,7 +10,7 @@ const Navbar = () => {
             <span className="text-xl font-bold cursor-pointer">Home</span>
           </Link>
         </div>
-        <div className="flex">
+        <div className="flex items-center"> {/* Add flex and items-center classes */}
           <Link href="/orderStatus">
             <span className="ml-4 cursor-pointer">Order Status Check</span>
           </Link>
@@ -19,6 +20,9 @@ const Navbar = () => {
           <Link href="/contact">
             <span className="ml-4 cursor-pointer">Contact</span>
           </Link>
+          <div className="ml-4"> {/* Wrap Login component in a div */}
+            <Login/>
+          </div>
         </div>
       </div>
     </nav>
