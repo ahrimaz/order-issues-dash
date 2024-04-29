@@ -1,11 +1,8 @@
+import withAuth from '../utils/withAuth';
 import { useSession } from 'next-auth/react';
 
 const AccountPage = () => {
   const { data: session } = useSession();
-
-  if (!session) {
-    return <div>Loading...</div>; // or redirect to login page
-  }
 
   return (
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
@@ -27,4 +24,4 @@ const AccountPage = () => {
   );
 };
 
-export default AccountPage;
+export default withAuth(AccountPage);
