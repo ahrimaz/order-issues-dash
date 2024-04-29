@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSession, signOut, signIn } from 'next-auth/react'; // Import signIn function
+import { useSession, signOut, signIn } from 'next-auth/react'; // signIn function
 import Link from 'next/link';
 
 const ProfileDropdown = () => {
@@ -12,7 +12,7 @@ const ProfileDropdown = () => {
 
   return (
     <div className="relative">
-      {/* Profile Picture */}
+      {/* profile picture */}
       {session && session.user && (
         <img
           src={session.user.image}
@@ -22,7 +22,7 @@ const ProfileDropdown = () => {
         />
       )}
 
-      {/* Dropdown Menu */}
+      {/* dropdown menu */}
       {isDropdownOpen && (
         <div className="absolute mt-2 w-48 bg-white rounded-md shadow-lg z-10 right-0">
           <Link className="block px-4 py-2 text-center text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900" href="/account">
@@ -34,7 +34,7 @@ const ProfileDropdown = () => {
         </div>
       )}
 
-      {/* Login Button */}
+      {/* login button */}
       {!session && (
         <button onClick={() => signIn('github')} className="text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md">
           Login

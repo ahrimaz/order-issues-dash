@@ -10,7 +10,7 @@ const Navbar = () => {
             <span className="text-xl font-bold cursor-pointer">Home</span>
           </Link>
         </div>
-        <div className="flex items-center"> {/* Add flex and items-center classes */}
+        <div className="flex items-center">
           <Link href="/orderStatus">
             <span className="ml-4 cursor-pointer">Order Status Check</span>
           </Link>
@@ -20,7 +20,7 @@ const Navbar = () => {
           <Link href="/contact">
             <span className="ml-4 cursor-pointer">Contact</span>
           </Link>
-          <div className="ml-4"> {/* Wrap Login component in a div */}
+          <div className="ml-4"> {/* wraplogin component */}
             <Login/>
           </div>
         </div>
