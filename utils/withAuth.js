@@ -12,7 +12,7 @@ const withAuth = (Component) => {
     }
 
     if (!session) {
-      router.replace('/login');
+      router.replace('/');
       return <div>Redirecting...</div>;
     }
 
