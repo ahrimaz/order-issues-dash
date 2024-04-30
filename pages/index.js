@@ -41,6 +41,7 @@ const OrderCard = ({ order }) => {
           <div>DP2 Adjustment: {order.dp2Adjustment}</div>
           <div>Preprint Adjustment: {order.preprintAdjustment}</div>
           <div>Date: {formatTimestamp(order.timeStamp)}</div>
+          <div>DP2 Approved: {order.buttonClicked} by {order.userName}</div>
           <input type="file" onChange={handleImageChange} />
           {image && <img src={URL.createObjectURL(image)} alt="Uploaded" className="mt-4" />}
         </div>
