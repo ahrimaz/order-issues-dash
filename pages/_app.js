@@ -8,8 +8,10 @@ export default function App({
 }) {
   return (
     <SessionProvider session={session}>
+      <div className="mt-20">
       <Nav />
       <Component {...pageProps} />
+      </div>
     </SessionProvider>
   )
 }
