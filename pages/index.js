@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { MongoClient } from 'mongodb';
 import { parse } from 'json2csv';
+import withAuth from '@/utils/withAuth';
 
 const dbUri = process.env.DB_URI;
 
@@ -130,4 +131,4 @@ export async function getServerSideProps() {
   };
 }
 
-export default Home;
+export default withAuth(Home);
