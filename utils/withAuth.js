@@ -1,28 +1,26 @@
-// utility auth function that we can use to wrap pages with authentication
-
-import { getSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
-const withAuth = (WrappedComponent) => {
-  return (props) => {
+const withAuth = (Component) => {
+  const AuthRoute = (props) => {
+    const { data: session, status } = useSession();
     const router = useRouter();
 
-    useEffect(() => {
-      const checkUser = async () => {
-        const session = await getSession();
-        if (!session) {
-          router.replace('/login');
-        }
-      };
+    // user is not authenticated, redirect to the login page
+    if (status === 'loading') {
+      return <div>Loading...</div>;
+    }
 
-      checkUser();
-    }, []);
+    if (!session) {
+      router.replace('/');
+      return <div>Redirecting...</div>;
+    }
 
-    return <WrappedComponent {...props} />;
+    // user is authenticated, render the component
+    return <Component {...props} />;
   };
-}
 
-// new withAuth function to wrap pages that will redirect unauth'd users to the home page immediately
+  return AuthRoute;
+};
 
 export default withAuth;
