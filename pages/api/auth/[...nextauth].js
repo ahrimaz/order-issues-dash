@@ -10,11 +10,6 @@ export const authOptions = {
     }),
     // more providers here
   ],
-  callbacks: {
-    async redirect(url, baseUrl) {
-      return typeof url === 'string' && url.startsWith(baseUrl) ? url : baseUrl
-    },
-  },
   secret: process.env.AUTH_SECRET,
 }
 
