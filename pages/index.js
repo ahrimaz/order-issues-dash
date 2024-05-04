@@ -5,7 +5,7 @@ import OrderCard from '@/components/orderCard';
 import withAuth from '@/utils/withAuth';
 
 const dbUri = process.env.DB_URI;
-const authOrderCard = withAuth(OrderCard);
+const AuthOrderCard = withAuth(OrderCard);
 
 const Home = ({ orders, page }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -65,7 +65,7 @@ const Home = ({ orders, page }) => {
       </div>
       <div className="overflow-x-auto">
         {filteredOrders.map(order => (
-          <authOrderCard key={order._id} order={order} />
+          <AuthOrderCard key={order._id} order={order} />
         ))}
       </div>
       <div className='flex justify-between mt-4 mb-4'>

@@ -9,7 +9,7 @@ export default async (req, res) => {
         "This is protected content. You can access this content because you are signed in.",
     })
   } else {
-    res.writeHead(302, { Location: '/contact' });
+    res.writeHead(302, { Location: '/' });
     res.end();
   }
 }
