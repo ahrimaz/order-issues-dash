@@ -2,10 +2,8 @@ import { useState } from 'react';
 import { MongoClient } from 'mongodb';
 import { parse } from 'json2csv';
 import OrderCard from '@/components/orderCard';
-import withAuth from '@/utils/withAuth';
 
 const dbUri = process.env.DB_URI;
-const AuthOrderCard = withAuth(OrderCard);
 
 const Home = ({ orders, page }) => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -65,7 +63,7 @@ const Home = ({ orders, page }) => {
       </div>
       <div className="overflow-x-auto">
         {filteredOrders.map(order => (
-          <AuthOrderCard key={order._id} order={order} />
+          <OrderCard key={order._id} order={order} />
         ))}
       </div>
       <div className='flex justify-between mt-4 mb-4'>
