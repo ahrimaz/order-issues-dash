@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Login from './login';
 import { useSession } from 'next-auth/react';
 import isValidUrl from '@/utils/isValidUrl';
+import ProfileDropdown from './login';
 
 const Navbar = () => {
 
@@ -26,19 +27,7 @@ const Navbar = () => {
             <span className="ml-4 cursor-pointer">Contact</span>
           </Link>
           <div className="ml-4">
-              {session ? (
-              isValidUrl(session.user.image) ? (
-                <img
-                  src={session.user.image}
-                  alt="User avatar"
-                  className="h-8 w-8 rounded-full"
-                />
-              ) : (
-                'Invalid URL'
-              )
-            ) : (
-              <Login/>
-            )}
+            <ProfileDropdown /> {/* use ProfileDropdown here */}
           </div>
         </div>
       </div>
