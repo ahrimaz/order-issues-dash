@@ -17,6 +17,9 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="flex items-center">
+        <Link href="/pricelist">
+            <span className="ml-4 cursor-pointer">Price List</span>
+          </Link>
           <Link href="/orderStatus">
             <span className="ml-4 cursor-pointer">Order Status Check</span>
           </Link>
