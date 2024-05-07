@@ -25,7 +25,19 @@ const Navbar = () => {
             <span className="ml-4 cursor-pointer">Contact</span>
           </Link>
           <div className="ml-4">
-            {session ? session.user.name : <Login/>}
+              {session ? (
+              isValidUrl(session.user.image) ? (
+                <img
+                  src={session.user.image}
+                  alt="User avatar"
+                  className="h-8 w-8 rounded-full"
+                />
+              ) : (
+                'Invalid URL'
+              )
+            ) : (
+              <Login/>
+            )}
           </div>
         </div>
       </div>
