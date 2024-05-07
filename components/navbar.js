@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Login from './login';
 import { useSession } from 'next-auth/react';
+import isValidUrl from '@/utils/isValidUrl';
 
 const Navbar = () => {
 
