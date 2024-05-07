@@ -9,25 +9,16 @@ const Home = ({ orders, page }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredOrders, setFilteredOrders] = useState(orders);
 
-  const handleSearchInputChange = (event) => {
+  const handleSearchInputChange = async (event) => {
     const query = event.target.value;
     setSearchQuery(query);
-    filterOrders(query);
-  };
-
-  const filterOrders = (query) => {
-    const filtered = orders.filter(order =>
-      (order.userId && order.userId.toLowerCase().includes(query.toLowerCase())) ||
-      (order.circumstance && order.circumstance.toLowerCase().includes(query.toLowerCase())) ||
-      (order.studio && order.studio.toLowerCase().includes(query.toLowerCase())) ||
-      (order.orderNumber && order.orderNumber.toLowerCase().includes(query.toLowerCase())) ||
-      (order.dpNumber && order.dpNumber.toLowerCase().includes(query.toLowerCase())) ||
-      (order.itemsQtyItemSurface && order.itemsQtyItemSurface.toLowerCase().includes(query.toLowerCase())) ||
-      (order.retouchAdjustment && order.retouchAdjustment.toLowerCase().includes(query.toLowerCase())) ||
-      (order.dp2Adjustment && order.dp2Adjustment.toLowerCase().includes(query.toLowerCase())) ||
-      (order.preprintAdjustment && order.preprintAdjustment.toLowerCase().includes(query.toLowerCase()))
-    );
-    setFilteredOrders(filtered);
+  
+    // Send a request to the server-side function with the search query
+    const response = await fetch(`/api/orders?search=${encodeURIComponent(query)}`);
+    const matchingOrders = await response.json();
+  
+    // Update the state with the matching orders
+    setFilteredOrders(matchingOrders);
   };
 
   const handleExportToCSV = () => {
