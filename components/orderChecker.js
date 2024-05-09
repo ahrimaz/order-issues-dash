@@ -4,53 +4,45 @@ const OrderCheck = ({ account: initialAccount }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [orderStatus, setOrderStatus] = useState([]);
-  const [account, setAccount] = useState(initialAccount);
+  const [account, setAccount] = useState(initialAccount || 'defaultAccount');
   const [orderID, setOrderID] = useState('');
 
   const handleCheckOrderStatus = async () => {
     setLoading(true);
     setError(null);
-
+  
     try {
       const params = new URLSearchParams();
-      params.append('account', account);
       params.append('orderID', orderID);
       params.append('format', 'json');
       params.append('type', 'standard');
-
-      const response = await fetch('/api/orderStatusQuery', {
+  
+      const response = await fetch(`/api/orderStatusQuery?account=${account}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: params.toString(),
       });
-
+  
       if (!response.ok) {
         throw new Error('Failed to fetch order status');
       }
-
+  
       const data = await response.json();
       setOrderStatus(data.Response);
     } catch (err) {
+      console.log('error:', err)
       setError(err.message);
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="max-w-lg mx-auto p-4 bg-white shadow-lg rounded-lg">
       <h1 className="text-2xl font-bold mb-4">Order Status Checker</h1>
-      <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2">Account:</label>
-        <input
-          type="text"
-          value={account}
-          onChange={(e) => setAccount(e.target.value)}
-          className="border rounded px-3 py-2 w-full"
-        />
-      </div>
       <div className="mb-4">
         <label className="block text-gray-700 font-bold mb-2">Order ID:</label>
         <input

@@ -3,7 +3,8 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  const { account, orderID, format, type } = req.body;
+  const { orderID, format, type } = req.body;
+  const { account } = req.query; // Extract account from URL parameters
 
   const authHeader = `Basic ${Buffer.from('DI:RPLAPI').toString('base64')}`;
 
@@ -14,6 +15,13 @@ export default async function handler(req, res) {
     formData.append('format', format);
     formData.append('type', type);
 
+    console.log('Sending request to https://dmz.richmondprolab.net/OrderAPI with the following parameters:');
+    console.log('Account:', account);
+    console.log('Order ID:', orderID);
+    console.log('Format:', format);
+    console.log('Type:', type);
+    console.log('Authorization Header:', authHeader);
+
     const response = await fetch('https://dmz.richmondprolab.net/OrderAPI', {
       method: 'POST',
       headers: {
@@ -22,6 +30,8 @@ export default async function handler(req, res) {
       },
       body: formData,
     });
+
+    console.log(response);
 
     if (!response.ok) {
       throw new Error('Failed to fetch order status');

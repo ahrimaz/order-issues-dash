@@ -15,8 +15,7 @@ const OrderCheckPage = () => {
 
   return (
     <div className="p-24 mb-4 overflow-hidden">
-      <OrderCheck setAccount={setAccount} /> 
-      <GenerateIframe account={account} />
+      <OrderCheck key={account} account={account} /> 
     </div>
   );
 };
