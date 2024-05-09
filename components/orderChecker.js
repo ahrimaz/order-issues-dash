@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-const OrderCheck = () => {
+const OrderCheck = ({ account: initialAccount }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [orderStatus, setOrderStatus] = useState([]);
-  const [account, setAccount] = useState('');
+  const [account, setAccount] = useState(initialAccount);
   const [orderID, setOrderID] = useState('');
 
   const handleCheckOrderStatus = async () => {
