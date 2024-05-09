@@ -24,7 +24,7 @@ const PriceList = () => {
                 type="text"
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-                className="w-full p-2 mb-4 border border-gray-200 rounded transition-all duration-200 ease-in-out" // Add transition here
+                className="w-full p-2 mb-4 border border-gray-200 rounded transition-all duration-200 ease-in-out"
                 placeholder="Search for a product..."
             />
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">

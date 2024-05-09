@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
 import OrderCheck from "@/components/orderChecker";
-import GenerateIframe from "./iframeGenerator";
 
 const OrderCheckPage = () => {
   const router = useRouter();

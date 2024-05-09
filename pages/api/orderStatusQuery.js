@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   }
 
   const { orderID, format, type } = req.body;
-  const { account } = req.query; // Extract account from URL parameters
+  const { account } = req.query; // extract account from URL parameters
 
   const authHeader = `Basic ${Buffer.from('DI:RPLAPI').toString('base64')}`;
 

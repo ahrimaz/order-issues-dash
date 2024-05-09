@@ -8,7 +8,6 @@ export default async function handler(req, res) {
         const db = client.db('Cluster0');
 
         const searchQuery = req.query.search;
-        console.log('Search query:', searchQuery); // Log the search query
 
         let orders;
 

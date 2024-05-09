@@ -1,5 +1,3 @@
-// write a full contact us page that includes a webform for the user to fill out and email us that includes tailwind styling
-
 import React from 'react';
 
   const ContactPage = () => {

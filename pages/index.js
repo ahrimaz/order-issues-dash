@@ -13,11 +13,11 @@ const Home = ({ orders, page }) => {
     const query = event.target.value;
     setSearchQuery(query);
   
-    // Send a request to the server-side function with the search query
+    // send a request to the server-side function with the search query
     const response = await fetch(`/api/orders?search=${encodeURIComponent(query)}`);
     const matchingOrders = await response.json();
   
-    // Update the state with the matching orders
+    // update the state with the matching orders
     setFilteredOrders(matchingOrders);
   };
 
