@@ -15,13 +15,6 @@ export default async function handler(req, res) {
     formData.append('format', format);
     formData.append('type', type);
 
-    console.log('Sending request to https://dmz.richmondprolab.net/OrderAPI with the following parameters:');
-    console.log('Account:', account);
-    console.log('Order ID:', orderID);
-    console.log('Format:', format);
-    console.log('Type:', type);
-    console.log('Authorization Header:', authHeader);
-
     const response = await fetch('https://dmz.richmondprolab.net/OrderAPI', {
       method: 'POST',
       headers: {
