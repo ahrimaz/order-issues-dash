@@ -5,7 +5,7 @@ const OrderStatusCard = ({ order }) => {
 
   const formatTimestamp = (timestamp) => {
     const date = new Date(timestamp);
-    return date.toLocaleString(undefined, {year: 'numeric', month: 'long', day: 'numeric'}); // use toLocaleString to format the date and time - no need for a utility
+    return date.toLocaleDateString(undefined, {year: 'numeric', month: 'long', day: 'numeric'}); // use toLocaleString to format the date and time - no need for a utility
   };
 
   return (
