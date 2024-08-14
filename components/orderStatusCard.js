@@ -3,6 +3,11 @@ import React from 'react';
 const OrderStatusCard = ({ order }) => {
   const { Account, LabOrderID, CustomerOrderID, Status } = order;
 
+  const formatTimestamp = (timestamp) => {
+    const date = new Date(timestamp);
+    return date.toLocaleString(undefined, {year: 'numeric', month: 'long', day: 'numeric'}); // use toLocaleString to format the date and time - no need for a utility
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-md p-4 mb-4 max-w-xl">
       <h2 className="text-xl font-semibold mb-2">Order Details</h2>
@@ -14,7 +19,7 @@ const OrderStatusCard = ({ order }) => {
         {Status.map((status, index) => (
           <div key={index} className="bg-gray-100 rounded-md p-2">
             <p className="text-base">Status: {status.code}</p>
-            <p className="text-base">Timestamp: {status.timestamp}</p>
+            <p className="text-base">Timestamp: {formatTimestamp(status.timestamp)}</p>
             {status.carrier && <p className="text-base">Carrier: {status.carrier}</p>}
             {status.tracking && <p className="text-base">Tracking: {status.tracking}</p>}
           </div>
