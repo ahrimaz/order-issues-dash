@@ -63,7 +63,7 @@ const OrderCheck = ({ account: initialAccount }) => {
 
   return (
     <div className="max-w-lg mx-auto p-4 bg-white shadow-lg rounded-lg">
-      <h1 className="text-2xl font-bold mb-4">Order Status Checker</h1>
+      <h1 className="text-2xl font-bold mb-4">Check Your Order Status</h1>
       <div className="mb-4">
         <label className="block text-gray-700 font-bold mb-2">Order ID:</label>
         <input
@@ -88,8 +88,7 @@ const OrderCheck = ({ account: initialAccount }) => {
               {selectedOrder.Status.length > 0 && (
                 <li key={selectedOrder.Status[0].timestamp} className="text-gray-700">
                   <div className="flex justify-between">
-                    <span className="font-semibold">{selectedOrder.Status[0].code}</span>
-                    <span className="text-sm text-gray-600">{formatDate(selectedOrder.Status[0].timestamp)}</span>
+                    <span className="font-semibold">{selectedOrder.Status[0].code} on {formatDate(selectedOrder.Status[0].timestamp)}</span>
                   </div>
                   {selectedOrder.Status[0].carrier && (
                     <div className="ml-4 text-sm text-gray-600">
