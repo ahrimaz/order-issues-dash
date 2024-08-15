@@ -62,21 +62,20 @@ const OrderCheck = ({ account: initialAccount }) => {
   
 
   return (
-    <div className="max-w-lg mx-auto p-4 bg-white shadow-lg rounded-lg">
-      <h1 className="text-2xl font-bold mb-4">Check Your Order Status</h1>
+    <div className="max-w-sm mx-auto p-4 bg-white shadow-lg rounded-lg text-center">
       <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2">Order ID:</label>
+        <label className="block text-gray-700 font-bold mb-2 ">Enter your order number below</label>
         <input
           type="text"
           value={orderID}
           onChange={(e) => setOrderID(e.target.value)}
-          className="border rounded px-3 py-2 w-full"
+          className="border rounded px-3 py-2 w-full focus:outline-double focus:shadow-outline"
         />
       </div>
       <button
         onClick={handleCheckOrderStatus}
         disabled={loading}
-        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
       >
         {loading ? 'Checking...' : 'Check Order Status'}
       </button>
