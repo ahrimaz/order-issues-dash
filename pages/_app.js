@@ -11,7 +11,7 @@ export default function App({
 
   return (
     <SessionProvider session={session}>
-      <div className="mt-20">
+      <div>
       {router.pathname !== '/orderStatus' && <Nav />}
       <Component {...pageProps} />
       </div>

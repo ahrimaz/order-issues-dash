@@ -13,7 +13,7 @@ const OrderCheckPage = () => {
     }, [router.query]);
 
     return (
-        <div className="p-2 mb-4 overflow-hidden">
+        <div className="p-1 mb-4 overflow-hidden">
             <OrderCheck key={account} account={account} /> 
         </div>
     );
