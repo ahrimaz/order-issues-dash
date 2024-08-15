@@ -62,14 +62,15 @@ const OrderCheck = ({ account: initialAccount }) => {
   
 
   return (
-    <div className="max-w-sm mx-auto p-4 bg-white shadow-lg rounded-lg text-center">
-      <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2 ">Enter your order number below</label>
+    <div className="max-w-sm mx-auto p-2 bg-white shadow-lg rounded-lg text-center">
+      <div className="mb-2">
+        <label className="block text-gray-700 font-bold mb-2 "></label>
         <input
           type="text"
           value={orderID}
           onChange={(e) => setOrderID(e.target.value)}
-          className="border rounded px-3 py-2 w-full focus:outline-double focus:shadow-outline"
+          className="border rounded px-4 py-2 w-full focus:outline-double focus:shadow-outline"
+          placeholder="Enter your order number..."
         />
       </div>
       <button
@@ -86,7 +87,7 @@ const OrderCheck = ({ account: initialAccount }) => {
             <ul className="space-y-2">
               {selectedOrder.Status.length > 0 && (
                 <li key={selectedOrder.Status[0].timestamp} className="text-gray-700">
-                  <div className="flex justify-between">
+                  <div className="flex justify-center">
                     <span className="font-semibold">{selectedOrder.Status[0].code} on {formatDate(selectedOrder.Status[0].timestamp)}</span>
                   </div>
                   {selectedOrder.Status[0].carrier && (
