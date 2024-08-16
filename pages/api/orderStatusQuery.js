@@ -33,6 +33,6 @@ export default async function handler(req, res) {
     const data = await response.json();
     res.status(200).json(data);
   } catch (err) {
-    res.status(500).json({ error: 'Failed to fetch order status. Please try again later.' });
+    res.status(500).json({ error: 'Unable to find order status. Contact Studio for further assistance.' });
   }
 }
