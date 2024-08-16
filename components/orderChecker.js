@@ -26,7 +26,7 @@ const OrderCheck = ({ account: initialAccount }) => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch order status');
+        throw new Error('Unable to fetch order status. Contact studio for further information.');
       }
 
       const data = await response.json();
