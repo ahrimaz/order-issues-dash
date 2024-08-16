@@ -27,7 +27,7 @@ export default async function handler(req, res) {
     console.log(response);
 
     if (!response.ok) {
-      throw new Error('Failed to fetch order status');
+      throw new Error('Unable to find order status. Contact Studio for further assistance.');
     }
 
     const data = await response.json();
