@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import Nav from "@/components/navbar";
 import { SessionProvider } from "next-auth/react"
 import { useRouter } from "next/router";
+import { Analytics } from '@vercel/analytics/react'
 
 export default function App({
   Component,
@@ -15,6 +16,7 @@ export default function App({
       {router.pathname !== '/orderStatus' && <Nav />}
       <Component {...pageProps} />
       </div>
+      <Analytics />
     </SessionProvider>
   )
 }
