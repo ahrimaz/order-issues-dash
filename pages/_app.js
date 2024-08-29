@@ -15,8 +15,8 @@ export default function App({
       <div>
       {router.pathname !== '/orderStatus' && <Nav />}
       <Component {...pageProps} />
-      {router.pathname === '/orderStatus' && <Analytics />}
       </div>
+      <Analytics />
     </SessionProvider>
   )
 }
