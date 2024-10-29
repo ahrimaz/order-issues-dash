@@ -15,7 +15,7 @@ const OrderCheck = ({ account: initialAccount }) => {
       const params = new URLSearchParams();
       params.append('orderID', orderID);
       params.append('format', 'json');
-      params.append('type', 'standard');
+      params.append('type', 'shipdate');
 
       const response = await fetch(`/api/orderStatusQuery?account=${account}`, {
         method: 'POST',
